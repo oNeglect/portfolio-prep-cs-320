@@ -1,0 +1,265 @@
+package test;
+
+import static org.junit.Assert.assertTrue;
+
+/* 
+ * Lawrence Arundel CS 320
+
+
+ * SNHU
+ * November 2022
+ * The class will implement various components include verifications, authenticity, and integrity standards.
+ * 
+ * Sources:
+ * SNHU, S. N. H. U. (2020, September 11). Junit tutorial. YouTube., 
+ * from https://www.youtube.com/watch?v=KbXhK9HUng4&amp;ab_channel=SNHUMedia 
+ * 
+ * Requirements
+ * The contact object shall have a required unique contact ID string that cannot be longer than 10 characters. 
+ * The contact ID shall not be null and shall not be updatable.
+ * 
+ * The contact object shall have a required firstName String field that cannot be longer than 10 characters. 
+ * The firstName field shall not be null.
+ * 
+ * The contact object shall have a required lastName String field that cannot be longer than 10 characters. 
+ * The lastName field shall not be null.
+ * 
+ * The contact object shall have a required phone String field that must be exactly 10 digits. 
+ * The phone field shall not be null.
+ * 
+ * The contact object shall have a required address field that must be no longer than 30 characters. 
+ * The address field shall not be null.
+ */
+
+import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+
+import contactservice.Contact;
+
+public class ContactTest {
+	// run various test to check and make sure that the created contact is
+	// appropriately checked
+	// through various assertion methods
+	@Test
+	public void testContact() {
+		// create contact to test whether the appropriate fields are satisfied to run
+		// further tests.
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Contact contact = new Contact("test", "test", "test", "testing123", "test");
+		// assertions that attempt to prove that each field is correctly implemented
+		// within that specified
+		// contact.
+		assertTrue(contact.getContactID().equalsIgnoreCase("test"));
+		assertTrue(contact.getFirstName().equalsIgnoreCase("test"));
+		assertTrue(contact.getLastName().equalsIgnoreCase("test"));
+		assertTrue(contact.getContactNumber().equalsIgnoreCase("testing123"));
+		assertTrue(contact.getContactAddress().equalsIgnoreCase("test"));
+	}
+
+	// test that checks the contact id for character length, if passing test,
+	// algorithm works properly.
+	@Test
+	public void testContactIDLength() {
+
+		// testing whether invalid length will throw an exception in the program.
+		// passing test indicates that null throws an exception which satisfies
+		// requirement
+		// contact id must not exceed length 10.
+		// passing test means that the input for contact id does throw an exception
+		// which means that the code executes correctly.
+		// testing string with length 16.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact("testingContactID", "testFirst", 
+					"testLastNa", "testContac", "testConta");
+		});
+	}
+
+	// test that checks the contact id for null value, if passing test, algorithm
+	// works properly.
+	@Test
+	public void testContactIDNull() {
+
+		// testing whether null will throw an exception in the program.
+		// passing test indicates that null throws an exception which satisfies
+		// requirement.
+		// contact id must not equal to null/empty.
+		// testing with contact id that equals null.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact(null, "testFirst", "testLastNa", 
+					"testContac", "testConta");
+		});
+	}
+
+	// test that checks the first name for character length. if passing test, the
+	// algorithm works correctly.
+	@Test
+	public void testFirstNameLength() {
+
+		// testing whether first name length will trigger the requirement/exception.
+		// the requirement states that the first name field cannot exceed 10 characters.
+		// a passing test indicates the variable has exceeded the threshold and the
+		// algorithm
+		// throws an exception.
+		// testing the variable for first name with length 16.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact("testContac", "testingFirstName", 
+					"testLastNa", "testContac", "testConta");
+		});
+	}
+
+	// test that checks the first name for null value. if passing test, the
+	// algorithm works correctly.
+	@Test
+	public void testFirstNameNull() {
+		// testing whether first name null value will trigger the requirement/exception.
+		// the requirement states that the first name field cannot equate to a null
+		// value.
+		// a passing test indicates the variable has a null value.
+		// testing the variable for first name with value of null.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact("testContac", null, 
+					"testLastNa", "testContac", "testConta");
+		});
+	}
+
+	// test that checks the last name for character length. test passes if the
+	// exception is handled properly.
+	@Test
+	public void testLastNameLength() {
+		// testing whether last name length will trigger the requirement/exception.
+		// the requirement states that the last name field cannot exceed 10 characters.
+		// a passing test indicates the variable has exceeded the threshold and the
+		// algorithm
+		// throws an exception.
+		// testing the variable for last name with length 15.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact("testContac", "testingFir", 
+					"testingLastName", "testContac", "testConta");
+		});
+	}
+
+	// test that checks the last name for null value. if passing testing, the
+	// algorithm works correctly.
+	@Test
+	public void testLastNameNull() {
+		// testing whether last name null value will trigger the requirement/exception.
+		// the requirement states that the last name field cannot equate to a null
+		// value.
+		// a passing test indicates the variable has a null value.
+		// testing the variable for last name with value of null.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact("testingCon", "testingFir", 
+					null, "testContac", "testConta");
+		});
+	}
+
+	// test that checks the contact number for character length. test passes if the
+	// exception is handled properly.
+	@Test
+	public void testContactNumberLength() {
+		// testing whether contact number length will trigger the requirement/exception.
+		// the requirement states that the contact number field must be exactly 10
+		// characters.
+		// a passing test indicates the variable has not satisfied the requirement and
+		// throws an exception.
+		// testing the variable for contact number with length 11.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact("testingCon", "testingFir", 
+					"testingLas", "testingCont", "testConta");
+		});
+	}
+
+	// test that checks the contact number for null value. if passing testing, the
+	// algorithm works correctly.
+	@Test
+	public void testContactNumberNull() {
+		// testing whether contact number null value will trigger the
+		// requirement/exception.
+		// the requirement states that the contact number field cannot equate to a null
+		// value.
+		// a passing test indicates the variable has a null value.
+		// testing the variable for contact number with value of null.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact("testingCon", "testingFir", 
+					"testingLas", null, "testConta");
+		});
+	}
+
+	// test that checks the contact address for character length. test passes if the
+	// exception is handled properly.
+	@Test
+	public void testContactAddressLength() {
+		// testing whether contact address length will trigger the
+		// requirement/exception.
+		// the requirement states that the contact address field cannot exceed 30
+		// characters.
+		// a passing test indicates the variable has exceeded the threshold and the
+		// algorithm
+		// throws an exception.
+		// testing the variable for last name with length 40.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact("testContac", "testingFir", "testingLas", "testContac",
+					"testContactAddressWithALengthofThirtyOne");
+		});
+	}
+
+	// test that checks the contact address for null value. if passing testing, the
+	// algorithm works correctly.
+	@Test
+	public void testContactAddressNull() {
+		// testing whether contact address null value will trigger the
+		// requirement/exception.
+		// the requirement states that the contact address field cannot equate to a null
+		// value.
+		// a passing test indicates the variable has a null value.
+		// testing the variable for contact address with value of null.
+
+		// constructor format in the assertion statement.
+		// Contact(String contactID, String firstName, String lastName, String
+		// contactNumber, String contactAddress).
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new Contact("testingCon", "testingFir", 
+					"testingLas", "testContac", null);
+		});
+	}
+}
